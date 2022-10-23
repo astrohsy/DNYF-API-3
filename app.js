@@ -1,5 +1,8 @@
 const express = require("express");
+const contactsRoutes = require("./main-routes/contacts-routes");
 
 const app = express();
 
-app.listen(5000);
+app.use("/contacts", contactsRoutes);
+
+app.listen(5005);
