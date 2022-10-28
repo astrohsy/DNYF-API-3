@@ -21,4 +21,45 @@ const getAllById = (uid) => {
 
 }
 
+const getEmailById = (uid) => {
+
+    return new Promise((resolve, reject) => {
+
+        pool.query(
+            "SELECT email FROM Email WHERE uid = ?", 
+            [uid], 
+            (error, result, fields) => {
+    
+                if (error)
+                    reject(new Error(error.sqlMessage ? error.sqlMessage : "Something went wrong while connecting to database"));
+    
+                resolve(result);
+            });
+        
+    
+    });
+
+
+}
+
+const getStatusByEmail = (email) => {
+    return new Promise((resolve, reject) => {
+
+        pool.query(
+            "SELECT verified FROM Email WHERE email = ?", 
+            [email], 
+            (error, result, fields) => {
+    
+                if (error)
+                    reject(new Error(error.sqlMessage ? error.sqlMessage : "Something went wrong while connecting to database"));
+    
+                resolve(result);
+            });
+        
+    
+    });
+}
+
 exports.getAllById = getAllById;
+exports.getEmailById = getEmailById;
+exports.getStatusByEmail = getStatusByEmail;
