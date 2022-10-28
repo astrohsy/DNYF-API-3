@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/astrohsy/DNYF-Contact-API#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "mysql2": "^2.3.3"
   }
 }
