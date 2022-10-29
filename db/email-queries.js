@@ -89,7 +89,6 @@ const postStatusByEmail = (email, status) => {
             (error, result, fields) => {
     
                 if (error) {
-                    console.log(error.sqlMessage);
                     reject(new Error(error.sqlMessage ? error.sqlMessage : "Something went wrong while connecting to database"));
                 }
 

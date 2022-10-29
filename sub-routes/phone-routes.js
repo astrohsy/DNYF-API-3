@@ -1,33 +1,15 @@
 const express = require("express");
+const phoneController = require("../controllers/phone-controller");
 
 const router = express.Router();
 
-router.get("/", (req, res, next) => {
-    res.status(200).json({uid: req.uid})
-});
+router.get("/", phoneController.getPhoneById);
 
-router.get("/", (req, res, next) => {
-    res.status(200).json({uid: req.uid})
-});
+router.post("/", phoneController.postPhoneById);
 
-router.post("/", (req, res, next) => {
-    res.status(200).json({uid: req.uid})
-});
+router.get("/status", phoneController.getStatusByPhone);
 
-router.get("/verify", (req, res, next) => {
-    res.status(200).json({uid: req.uid})
-});
+router.post("/status", phoneController.postStatusByPhone);
 
-router.post("/verify", (req, res, next) => {
-    res.status(200).json({uid: req.uid})
-});
-
-router.get("/status", (req, res, next) => {
-    res.status(200).json({uid: req.uid})
-});
-
-router.post("/status", (req, res, next) => {
-    res.status(200).json({uid: req.uid})
-});
 
 module.exports = router;

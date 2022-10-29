@@ -10,7 +10,7 @@ router.use("/:uid?/email", (req, res, next) => {
 });
 
 router.use("/:uid?/phone", (req, res, next) => {
-    req.input = req.params.input;
+    req.uid = req.params.uid;
     phoneRoutes(req, res, next);
 });
 

@@ -2,7 +2,7 @@ const emailQueries = require('../db/email-queries')
 
 const getAllById = async (req, res, next) => {
 
-    let uid = req.input;
+    let uid = req.uid;
 
     emailQueries.getAllById(uid)
     .then((result) => {
@@ -89,6 +89,9 @@ const postStatusByEmail = async (req, res, next) => {
 
     emailQueries.postStatusByEmail(email, status)
     .then((result) => {
+
+        if (result.affectedRows == 0)
+            return next(new Error("Email not found"))
 
         res.status(200).send();
     })
