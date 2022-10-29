@@ -16,7 +16,7 @@ const getAllById = async (req, res, next) => {
 
 const getEmailById = async (req, res, next) => {
 
-    let uid = req.input;
+    let uid = req.uid;
 
     emailQueries.getEmailById(uid)
     .then((result) => {
@@ -37,7 +37,11 @@ const getEmailById = async (req, res, next) => {
 
 const getStatusByEmail = async (req, res, next) => {
 
-    let email = req.input;
+    if (!(req.body || req.body.email)) {
+        return next(new Error("Request body is missing or invalid request format"));
+    }
+
+    let email = req.body.email;
 
     emailQueries.getStatusByEmail(email)
     .then((result) => {
@@ -74,6 +78,10 @@ const postEmailById = async (req, res, next) => {
         next(err);
     })
 };
+
+const postStatusByEmail = async (req, res, next) => {
+
+}
 
 exports.getEmailById = getEmailById;
 exports.getStatusByEmail = getStatusByEmail;

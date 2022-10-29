@@ -4,12 +4,12 @@ const phoneRoutes = require("../sub-routes/phone-routes");
 
 const router = express.Router();
 
-router.use("/:input/email", (req, res, next) => {
-    req.input = req.params.input;
+router.use("/:uid?/email", (req, res, next) => {
+    req.uid = req.params.uid;
     emailRoutes(req, res, next);
 });
 
-router.use("/:input/phone", (req, res, next) => {
+router.use("/:uid?/phone", (req, res, next) => {
     req.input = req.params.input;
     phoneRoutes(req, res, next);
 });
