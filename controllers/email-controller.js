@@ -6,7 +6,7 @@ const getAllById = async (req, res, next) => {
 
     emailQueries.getAllById(uid)
     .then((result) => {
-        res.status(200).json({result: result});
+        res.status(200).send(result);
     })
     .catch((err) => {
         next(err);
@@ -27,7 +27,7 @@ const getEmailById = async (req, res, next) => {
 
         result = result.map(x => x['email']);
 
-        res.status(200).json({result: result});
+        res.status(200).send(result);
     })
     .catch((err) => {
         next(err);
@@ -48,7 +48,7 @@ const getStatusByEmail = async (req, res, next) => {
 
         result = result[0]['verified'];
 
-        res.status(200).json({result: true ? result == 1 : false});
+        res.status(200).json({verified: true ? result == 1 : false});
     })
     .catch((err) => {
         next(err);
@@ -56,5 +56,25 @@ const getStatusByEmail = async (req, res, next) => {
 
 };
 
+const postEmailById = async (req, res, next) => {
+
+    if (!(req.body || req.body.email)) {
+        return next(new Error("Request body is missing or invalid request format"));
+    }
+
+    let email = req.body.email;
+    let uid  = req.input;
+
+    emailQueries.postEmailById(email, uid)
+    .then((result) => {
+
+        res.status(200).json(result);
+    })
+    .catch((err) => {
+        next(err);
+    })
+};
+
 exports.getEmailById = getEmailById;
 exports.getStatusByEmail = getStatusByEmail;
+exports.postEmailById = postEmailById;

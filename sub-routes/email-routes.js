@@ -5,9 +5,7 @@ const router = express.Router();
 
 router.get("/", emailController.getEmailById);
 
-router.post("/", (req, res, next) => {
-    res.status(200).json({uid: req.uid})
-});
+router.post("/", emailController.postEmailById);
 
 router.post("/verify", (req, res, next) => {
     res.status(200).json({uid: req.uid})

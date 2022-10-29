@@ -60,6 +60,27 @@ const getStatusByEmail = (email) => {
     });
 }
 
+const postEmailById = (email, uid) => {
+    return new Promise((resolve, reject) => {
+
+        pool.query(
+            "INSERT INTO Email (email, uid, verified) VALUES (?, ?, DEFAULT)", 
+            [email, uid], 
+            (error, result, fields) => {
+    
+                if (error)
+                    reject(new Error(error.sqlMessage ? error.sqlMessage : "Something went wrong while connecting to database"));
+                
+                result = {uid: uid, email: email, verified: false};
+
+                resolve(result);
+            });
+        
+    
+    });
+}
+
 exports.getAllById = getAllById;
 exports.getEmailById = getEmailById;
 exports.getStatusByEmail = getStatusByEmail;
+exports.postEmailById = postEmailById;

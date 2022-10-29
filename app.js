@@ -3,6 +3,8 @@ const contactsRoutes = require("./main-routes/contacts-routes");
 
 const app = express();
 
+app.use(express.json());
+
 app.use("/contacts", contactsRoutes);
 
 app.use((error, req, res, next) => {

@@ -7,7 +7,7 @@ CREATE TABLE Student (
 
 CREATE TABLE Email (
 	email VARCHAR(128) NOT NULL,
-    verified TINYINT NOT NULL, 
+    verified TINYINT NOT NULL DEFAULT 0, 
     uid INT,
     UNIQUE(email),
     PRIMARY KEY (uid, email),
@@ -16,7 +16,7 @@ CREATE TABLE Email (
 
 CREATE TABLE Phone (
 	phone_number VARCHAR(16) NOT NULL,
-    verified TINYINT NOT NULL, 
+    verified TINYINT NOT NULL DEFAULT 0, 
     uid INT,
     UNIQUE(phone_number),
     PRIMARY KEY (uid, phone_number),
