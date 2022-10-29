@@ -80,7 +80,28 @@ const postEmailById = (email, uid) => {
     });
 }
 
+const postStatusByEmail = (email, status) => {
+    return new Promise((resolve, reject) => {
+
+        pool.query(
+            "UPDATE Email SET verified = ? WHERE email = ?", 
+            [status, email], 
+            (error, result, fields) => {
+    
+                if (error) {
+                    console.log(error.sqlMessage);
+                    reject(new Error(error.sqlMessage ? error.sqlMessage : "Something went wrong while connecting to database"));
+                }
+
+                resolve(result);
+            });
+        
+    
+    });
+}
+
 exports.getAllById = getAllById;
 exports.getEmailById = getEmailById;
 exports.getStatusByEmail = getStatusByEmail;
 exports.postEmailById = postEmailById;
+exports.postStatusByEmail = postStatusByEmail;

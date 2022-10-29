@@ -7,10 +7,9 @@ router.get("/", emailController.getEmailById);
 
 router.post("/", emailController.postEmailById);
 
-router.post("/verify", (req, res, next) => {
-    res.status(200).json({uid: req.uid})
-});
-
 router.get("/status", emailController.getStatusByEmail);
+
+router.post("/status", emailController.postStatusByEmail);
+
 
 module.exports = router;
