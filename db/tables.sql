@@ -11,7 +11,7 @@ CREATE TABLE Email (
     uid INT,
     UNIQUE(email),
     PRIMARY KEY (uid, email),
-    FOREIGN KEY (uid) REFERENCES Student(uid) ON UPDATE CASCADE ON DELETE CASCADE
+    FOREIGN KEY (uid) REFERENCES User(uid) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE Phone (
@@ -20,5 +20,5 @@ CREATE TABLE Phone (
     uid INT,
     UNIQUE(phone_number),
     PRIMARY KEY (uid, phone_number),
-    FOREIGN KEY (uid) REFERENCES Student(uid) ON UPDATE CASCADE ON DELETE CASCADE
+    FOREIGN KEY (uid) REFERENCES User(uid) ON UPDATE CASCADE ON DELETE CASCADE
 );
