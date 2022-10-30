@@ -12,4 +12,4 @@ app.use((error, req, res, next) => {
     res.json({error: error.message || "An unknown error has occured"});
 })
 
-app.listen(5005);
+app.listen(80);
