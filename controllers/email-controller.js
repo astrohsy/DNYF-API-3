@@ -67,7 +67,7 @@ const postEmailById = async (req, res, next) => {
     }
 
     let email = req.body.email;
-    let uid  = req.input;
+    let uid  = req.uid;
 
     emailQueries.postEmailById(email, uid)
     .then((result) => {
