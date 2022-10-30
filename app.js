@@ -8,8 +8,8 @@ app.use(express.json());
 app.use("/contacts", contactsRoutes);
 
 app.use((error, req, res, next) => {
-    res.status(error.code || 500);
-    res.json({message: error.message || "An unknown error has occured"});
+    res.status(error.code || 400);
+    res.json({error: error.message || "An unknown error has occured"});
 })
 
 app.listen(5005);
