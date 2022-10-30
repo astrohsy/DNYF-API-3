@@ -1,6 +1,6 @@
 use `COMS6156-contacts-db`;
 
-CREATE TABLE Student (
+CREATE TABLE User (
 	uid INT, 
     PRIMARY KEY (uid)
 );
