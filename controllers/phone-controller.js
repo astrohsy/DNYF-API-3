@@ -6,7 +6,7 @@ const getAllById = async (req, res, next) => {
 
     phoneQueries.getAllById(uid)
     .then((result) => {
-        res.status(200).send(result);
+        res.status(200).send({data: result});
     })
     .catch((err) => {
         next(err);
@@ -27,7 +27,7 @@ const getPhoneById = async (req, res, next) => {
 
         result = result.map(x => x['phone_number']);
 
-        res.status(200).send(result);
+        res.status(200).send({data: result});
     })
     .catch((err) => {
         next(err);
@@ -52,7 +52,7 @@ const getStatusByPhone = async (req, res, next) => {
 
         result = result[0]['verified'];
 
-        res.status(200).json({verified: true ? result == 1 : false});
+        res.status(200).json({data: {verified: true ? result == 1 : false}});
     })
     .catch((err) => {
         next(err);
@@ -72,7 +72,7 @@ const postPhoneById = async (req, res, next) => {
     phoneQueries.postPhoneById(phone, uid)
     .then((result) => {
 
-        res.status(200).json(result);
+        res.status(200).json({data: result});
     })
     .catch((err) => {
         next(err);
