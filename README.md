@@ -2,15 +2,30 @@
 
 This is the contacts service for the Study Buddy App. The contacts serivce keeps track of user's contact information such as phone number, email, and their verification status. 
 
+## Installation
+
+The service will be installed using Docker container. 
+
+Please make sure you are at the root level of this project and follow the following commands:
+
+```
+docker build . -t <image name>
+
+docker run -d -p 5005:5005 --name <container name>  -e DB_HOST='<DB host url>' -e DB_USER='<DB username>' -e DB_PASSWORD='<DB password>' -e DB_NAME='<DB name>' <image name>
+```
+
 ## Entrypoints
 
 ```
 GET /contacts/{uid}/phone
 
 Response (array of phone numbers)
-[
-	str // phone numbers
-]
+{
+	data:
+		[
+			str // phone numbers
+		]
+}
 ```
 
 ```
@@ -25,10 +40,11 @@ Request body
 
 Response
 {
-
-	uid: int
-	phone: str
-	verified: str
+	data: {
+		uid: int
+		phone: str
+		verified: str
+	}
 
 }
 ```
@@ -37,6 +53,12 @@ Response
 GET  /contacts/{uid}/email
 
 Response (array of emails)
+{
+	data:
+	[
+		str // emails
+	]
+}
 [
 	str // emails
 ]
@@ -53,9 +75,11 @@ Request body
 Response
 {
 
-	uid: int
-	email: str
-	verified: bool
+	data: {
+		uid: int
+		email: str
+		verified: bool
+	}
 
 }
 ```
@@ -70,7 +94,9 @@ Request body
 
 Response
 {
-	verified: bool
+	data: {
+		verified: bool
+	}
 }
 ```
 
@@ -96,7 +122,9 @@ Request body
 
 Response
 {
-	verified: bool
+	data: {
+		verified: bool
+	}
 }
 ```
 
