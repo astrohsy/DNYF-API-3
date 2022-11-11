@@ -9,7 +9,7 @@ router.post("/", emailController.postEmailById);
 
 router.get("/status", emailController.getStatusByEmail);
 
-router.post("/status", emailController.postStatusByEmail);
+router.put("/status", emailController.updateStatusByEmail);
 
 
 module.exports = router;

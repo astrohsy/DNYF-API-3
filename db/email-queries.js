@@ -80,7 +80,7 @@ const postEmailById = (email, uid) => {
     });
 }
 
-const postStatusByEmail = (email, status) => {
+const updateStatusByEmail = (email, status) => {
     return new Promise((resolve, reject) => {
 
         pool.query(
@@ -103,4 +103,4 @@ exports.getAllById = getAllById;
 exports.getEmailById = getEmailById;
 exports.getStatusByEmail = getStatusByEmail;
 exports.postEmailById = postEmailById;
-exports.postStatusByEmail = postStatusByEmail;
+exports.updateStatusByEmail = updateStatusByEmail;

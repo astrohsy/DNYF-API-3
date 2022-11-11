@@ -80,7 +80,7 @@ const postPhoneById = (phone, uid) => {
     });
 }
 
-const postStatusByPhone = (phone, status) => {
+const updateStatusByPhone = (phone, status) => {
     return new Promise((resolve, reject) => {
 
         pool.query(
@@ -103,4 +103,4 @@ exports.getAllById = getAllById;
 exports.getPhoneById = getPhoneById;
 exports.getStatusByPhone = getStatusByPhone;
 exports.postPhoneById = postPhoneById;
-exports.postStatusByPhone = postStatusByPhone;
+exports.updateStatusByPhone = updateStatusByPhone;

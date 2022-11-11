@@ -9,7 +9,7 @@ router.post("/", phoneController.postPhoneById);
 
 router.get("/status", phoneController.getStatusByPhone);
 
-router.post("/status", phoneController.postStatusByPhone);
+router.put("/status", phoneController.updateStatusByPhone);
 
 
 module.exports = router;
