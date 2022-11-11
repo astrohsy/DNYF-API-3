@@ -79,16 +79,16 @@ const postPhoneById = async (req, res, next) => {
     })
 };
 
-const postStatusByPhone = async (req, res, next) => {
+const updateStatusByPhone = async (req, res, next) => {
 
-    if (!(req.body && req.body.phone && req.body.status)) {
+    if (!(req.body && req.body.phone && req.body.status !== undefined)) {
         return next(new Error("Request body is missing or invalid request format"));
     }
 
     let phone = req.body.phone;
     let status = 1 ? req.body.status === true : 0
 
-    phoneQueries.postStatusByPhone(phone, status)
+    phoneQueries.updateStatusByPhone(phone, status)
     .then((result) => {
 
         if (result.affectedRows == 0)
@@ -105,4 +105,4 @@ exports.getAllById = getAllById;
 exports.getPhoneById = getPhoneById;
 exports.getStatusByPhone = getStatusByPhone;
 exports.postPhoneById = postPhoneById;
-exports.postStatusByPhone = postStatusByPhone;
+exports.updateStatusByPhone = updateStatusByPhone;

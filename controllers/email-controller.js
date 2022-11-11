@@ -79,15 +79,15 @@ const postEmailById = async (req, res, next) => {
     })
 };
 
-const postStatusByEmail = async (req, res, next) => {
-    if (!(req.body && req.body.email && req.body.status)) {
+const updateStatusByEmail = async (req, res, next) => {
+    if (!(req.body && req.body.email && req.body.status !== undefined)) {
         return next(new Error("Request body is missing or invalid request format"));
     }
 
     let email = req.body.email;
     let status = 1 ? req.body.status === true : 0
 
-    emailQueries.postStatusByEmail(email, status)
+    emailQueries.updateStatusByEmail(email, status)
     .then((result) => {
 
         if (result.affectedRows == 0)
@@ -104,4 +104,4 @@ exports.getAllById = getAllById;
 exports.getEmailById = getEmailById;
 exports.getStatusByEmail = getStatusByEmail;
 exports.postEmailById = postEmailById;
-exports.postStatusByEmail = postStatusByEmail;
+exports.updateStatusByEmail = updateStatusByEmail;
