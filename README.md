@@ -101,7 +101,7 @@ Response
 ```
 
 ```
-POST /contacts/{uid}/email/status (verify user email)
+PUT /contacts/{uid}/email/status (verify user email)
 
 Request body
 {
@@ -129,7 +129,7 @@ Response
 ```
 
 ```
-POST /contacts/phone/status (verify user phone number)
+PUT /contacts/phone/status (verify user phone number)
 
 Request body
 {
