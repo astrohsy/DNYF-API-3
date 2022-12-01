@@ -1,27 +1,6 @@
-let pool = require("./db");
+let pool = require("./db-init");
 
-const getAllById = (uid) => {
-
-    return new Promise((resolve, reject) => {
-
-        pool.query(
-            "SELECT * FROM Email WHERE uid = ?", 
-            [uid], 
-            (error, results, fields) => {
-    
-                if (error)
-                    reject(new Error(error.sqlMessage ? error.sqlMessage : "Something went wrong while connecting to database"));
-    
-                resolve(results);
-            })
-        
-    
-    })
-
-
-}
-
-const getEmailById = (uid) => {
+const getEmailByUid = (uid) => {
 
     return new Promise((resolve, reject) => {
 
@@ -39,6 +18,26 @@ const getEmailById = (uid) => {
     
     });
 
+
+}
+
+const getUidByEmail = (email) => {
+
+    return new Promise((resolve, reject) => {
+
+        pool.query(
+            "SELECT uid FROM Email WHERE email = ?", 
+            [email], 
+            (error, result, fields) => {
+    
+                if (error)
+                    reject(new Error(error.sqlMessage ? error.sqlMessage : "Something went wrong while connecting to database"));
+    
+                resolve(result);
+            });
+        
+    
+    });
 
 }
 
@@ -60,7 +59,7 @@ const getStatusByEmail = (email) => {
     });
 }
 
-const postEmailById = (email, uid) => {
+const postEmail = (email, uid) => {
     return new Promise((resolve, reject) => {
 
         pool.query(
@@ -81,6 +80,7 @@ const postEmailById = (email, uid) => {
 }
 
 const updateStatusByEmail = (email, status) => {
+    
     return new Promise((resolve, reject) => {
 
         pool.query(
@@ -99,8 +99,52 @@ const updateStatusByEmail = (email, status) => {
     });
 }
 
-exports.getAllById = getAllById;
-exports.getEmailById = getEmailById;
+const updateEmailByUid = (uid, email) => {
+
+    return new Promise((resolve, reject) => {
+
+        pool.query(
+            "UPDATE Email SET email = ?, verified = DEFAULT(verified) WHERE uid = ?", 
+            [email, uid], 
+            (error, result, fields) => {
+    
+                if (error) {
+                    reject(new Error(error.sqlMessage ? error.sqlMessage : "Something went wrong while connecting to database"));
+                }
+
+                resolve(result);
+            });
+        
+    
+    });
+
+}
+
+const deleteEmailByUid = (uid) => {
+
+    return new Promise((resolve, reject) => {
+
+        pool.query(
+            "DELETE FROM Email WHERE uid = ?", 
+            [uid], 
+            (error, result, fields) => {
+    
+                if (error) {
+                    reject(new Error(error.sqlMessage ? error.sqlMessage : "Something went wrong while connecting to database"));
+                }
+
+                resolve(result);
+            });
+        
+    
+    });
+
+}
+
+exports.postEmail = postEmail;
+exports.getEmailByUid = getEmailByUid;
+exports.getUidByEmail = getUidByEmail;
 exports.getStatusByEmail = getStatusByEmail;
-exports.postEmailById = postEmailById;
+exports.updateEmailByUid = updateEmailByUid;
 exports.updateStatusByEmail = updateStatusByEmail;
+exports.deleteEmailByUid = deleteEmailByUid;

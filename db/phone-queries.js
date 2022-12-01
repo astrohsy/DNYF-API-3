@@ -1,4 +1,4 @@
-let pool = require("./db");
+let pool = require("./db-init");
 
 const getAllById = (uid) => {
 
