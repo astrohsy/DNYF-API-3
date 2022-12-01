@@ -4,19 +4,6 @@ This is the contacts service for the Study Buddy App. The contacts serivce keeps
 
 ## Installation
 
-### Building Image
-
-The service will be installed using Docker container.
-
-Please make sure you are at the root level of this project and follow the following commands:
-
-```
-docker build . -t <image name>
-
-docker run -d -p 5005:5005 --name <container name>  -e DB_HOST='<DB host url>' -e DB_PORT='<DB port>' -e DB_USER='<DB username>' -e DB_PASSWORD='<DB password>' -e DB_NAME='<DB name>' <image name>
-
-```
-
 ### Setup Testing Env
 
 ```
@@ -28,6 +15,21 @@ docker-compose up
 ```
 docker-compose down
 docker-compose down --volumes
+```
+
+
+### Building and Running individually
+
+```
+docker build . -t <image name>
+
+docker run -d -p 5005:5005 --name dynf_contacts_api \
+	-e DB_HOST='<DB host url>' \
+	-e DB_PORT='<DB port>' \
+	-e DB_USER='<DB username>' \
+	-e DB_PASSWORD='<DB password>' \
+	-e DB_NAME='<DB name>' \
+	dynf_contacts_api
 ```
 
 
