@@ -171,7 +171,7 @@ const deleteEmailByUid = async (req, res, next) => {
             return;
         }
 
-        res.status(200).json({data: result});
+        res.status(200).send();
     })
     .catch((err) => {
         next(err);
