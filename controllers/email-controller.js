@@ -1,31 +1,18 @@
 const emailQueries = require('../db/email-queries')
 
-const getAllById = async (req, res, next) => {
+const getEmailByUid = async (req, res, next) => {
 
     let uid = req.uid;
 
-    emailQueries.getAllById(uid)
-    .then((result) => {
-        res.status(200).send({data: result});
-    })
-    .catch((err) => {
-        next(err);
-    })
-
-};
-
-const getEmailById = async (req, res, next) => {
-
-    let uid = req.uid;
-
-    emailQueries.getEmailById(uid)
+    emailQueries.getEmailByUid(uid)
     .then((result) => {
         
         if (result.length == 0) {
-            throw new Error("UID does not exist");
+            res.status(404).json({message: "UID does not exist"});
+            return;
         }
 
-        result = result.map(x => x['email']);
+        result = result[0]
 
         res.status(200).send({data: result});
     })
@@ -34,11 +21,39 @@ const getEmailById = async (req, res, next) => {
     })
 
 };
+
+const getUidByEmail = async (req, res, next) => {
+
+    if (!(req.body && req.body.email)) {
+        res.status(400).json({message: "Request body is missing or invalid request format"});
+        return;
+    }
+
+    let email = req.body.email;
+
+    emailQueries.getUidByEmail(email)
+    .then((result) => {
+
+        if (result.length == 0) {
+            res.status(404).json({message: "UID does not exist"});
+            return;
+        }
+
+        result = result[0];
+
+        res.status(200).json({data: result});
+    })
+    .catch((err) => {
+        next(err);
+    })
+
+}
 
 const getStatusByEmail = async (req, res, next) => {
 
     if (!(req.body && req.body.email)) {
-        return next(new Error("Request body is missing or invalid request format"));
+        res.status(400).json({message: "Request body is missing or invalid request format"});
+        return;
     }
 
     let email = req.body.email;
@@ -47,7 +62,8 @@ const getStatusByEmail = async (req, res, next) => {
     .then((result) => {
 
         if (result.length == 0) {
-            throw new Error("Email does not exist");
+            res.status(404).json({message: "Email does not exist"});
+            return;
         }
 
         result = result[0]['verified'];
@@ -60,28 +76,37 @@ const getStatusByEmail = async (req, res, next) => {
 
 };
 
-const postEmailById = async (req, res, next) => {
-
-    if (!(req.body && req.body.email)) {
-        return next(new Error("Request body is missing or invalid request format"));
+const postEmail = async (req, res, next) => {
+    
+    if (!(req.uid && req.body && req.body.email)) {
+        res.status(400).json({message: "Request body is missing or invalid request format"});
+        return;
     }
 
+    let uid = req.uid;
     let email = req.body.email;
-    let uid  = req.uid;
 
-    emailQueries.postEmailById(email, uid)
+    emailQueries.postEmail(uid, email)
     .then((result) => {
+
+        if (result.length == 0) {
+            res.status(404).json({message: "Email does not exist"});
+            return;
+        }
 
         res.status(200).json({data: result});
     })
     .catch((err) => {
         next(err);
     })
+
 };
 
 const updateStatusByEmail = async (req, res, next) => {
+
     if (!(req.body && req.body.email && req.body.status !== undefined)) {
-        return next(new Error("Request body is missing or invalid request format"));
+        res.status(400).json({message: "Request body is missing or invalid request format"});
+        return;
     }
 
     let email = req.body.email;
@@ -90,18 +115,74 @@ const updateStatusByEmail = async (req, res, next) => {
     emailQueries.updateStatusByEmail(email, status)
     .then((result) => {
 
-        if (result.affectedRows == 0)
-            return next(new Error("Email not found"))
+        if (result.affectedRows == 0) {
+            res.status(404).json({message: "Email does not exist"});
+            return;
+        }
 
         res.status(200).send();
     })
     .catch((err) => {
         next(err);
     })
+
+};
+
+const updateEmailByUid = async (req, res, next) => {
+
+    if (!(req.uid && req.body && req.body.email !== undefined)) {
+        res.status(400).json({message: "Request body is missing or invalid request format"});
+        return;
+    }
+
+    let email = req.body.email;
+    let uid = req.uid;
+
+    emailQueries.updateEmailByUid(uid, email)
+    .then((result) => {
+
+        if (result.affectedRows == 0) {
+            res.status(404).json({message: "User or email does not exist"});
+            return;
+        }
+
+        res.status(200).send();
+    })
+    .catch((err) => {
+        next(err);
+    })
+
+};
+
+const deleteEmailByUid = async (req, res, next) => {
+
+    if (!(req.uid !== undefined)) {
+        res.status(400).json({message: "Request body is missing or invalid request format"});
+        return;
+    }
+
+    let uid = req.uid;
+
+    emailQueries.deleteEmailByUid(uid)
+    .then((result) => {
+
+        if (result.affectedRows == 0) {
+            res.status(404).json({message: "Email does not exist"});
+            return;
+        }
+
+        res.status(200).json({data: result});
+    })
+    .catch((err) => {
+        next(err);
+    })
+
 }
 
-exports.getAllById = getAllById;
-exports.getEmailById = getEmailById;
+exports.getEmailByUid = getEmailByUid;
+exports.getUidByEmail = getUidByEmail;
 exports.getStatusByEmail = getStatusByEmail;
-exports.postEmailById = postEmailById;
+exports.postEmail = postEmail;
 exports.updateStatusByEmail = updateStatusByEmail;
+exports.updateEmailByUid = updateEmailByUid;
+exports.deleteEmailByUid = deleteEmailByUid;

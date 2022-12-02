@@ -59,7 +59,7 @@ const getStatusByEmail = (email) => {
     });
 }
 
-const postEmail = (email, uid) => {
+const postEmail = (uid, email) => {
     return new Promise((resolve, reject) => {
 
         pool.query(
