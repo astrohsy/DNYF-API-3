@@ -29,14 +29,16 @@ const getUidByPhone = (phone_number) => {
             "SELECT uid FROM Phone WHERE phone_number = ?", 
             [phone_number], 
             (error, result, fields) => {
-    
-                if (error)
+
+                if (error) {
+                    console.log(error);
                     reject(new Error(error.sqlMessage ? error.sqlMessage : "Something went wrong while connecting to database"));
-    
+                }
+
                 resolve(result);
             });
-        
-    
+
+
     });
 
 }
@@ -48,14 +50,16 @@ const getStatusByPhone = (phone_number) => {
             "SELECT verified FROM Phone WHERE phone_number = ?", 
             [phone_number], 
             (error, result, fields) => {
-    
-                if (error)
+
+                if (error) {
+                    console.log(error);
                     reject(new Error(error.sqlMessage ? error.sqlMessage : "Something went wrong while connecting to database"));
-    
+                }
+
                 resolve(result);
             });
-        
-    
+
+
     });
 }
 
@@ -66,16 +70,18 @@ const postPhone = (uid, phone_number) => {
             "INSERT INTO Phone (phone_number, uid, verified) VALUES (?, ?, DEFAULT)", 
             [phone_number, uid], 
             (error, result, fields) => {
-    
-                if (error)
+
+                if (error) {
+                    console.log(error);
                     reject(new Error(error.sqlMessage ? error.sqlMessage : "Something went wrong while connecting to database"));
+                }
                 
                 result = {uid: uid, phone_number: phone_number, verified: false};
 
                 resolve(result);
             });
-        
-    
+
+
     });
 }
 
@@ -107,15 +113,16 @@ const updatePhoneByUid = (uid, phone_number) => {
             "UPDATE Phone SET phone_number = ?, verified = DEFAULT(verified) WHERE uid = ?", 
             [phone_number, uid], 
             (error, result, fields) => {
-    
+
                 if (error) {
+                    console.log(error);
                     reject(new Error(error.sqlMessage ? error.sqlMessage : "Something went wrong while connecting to database"));
                 }
 
                 resolve(result);
             });
-        
-    
+
+
     });
 
 }

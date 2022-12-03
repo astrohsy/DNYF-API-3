@@ -29,14 +29,16 @@ const getUidByEmail = (email) => {
             "SELECT uid FROM Email WHERE email = ?", 
             [email], 
             (error, result, fields) => {
-    
-                if (error)
+
+                if (error) {
+                    console.log(error);
                     reject(new Error(error.sqlMessage ? error.sqlMessage : "Something went wrong while connecting to database"));
-    
+                }
+
                 resolve(result);
             });
-        
-    
+
+
     });
 
 }
@@ -45,17 +47,19 @@ const getStatusByEmail = (email) => {
     return new Promise((resolve, reject) => {
 
         pool.query(
-            "SELECT verified FROM Email WHERE email = ?", 
-            [email], 
+            "SELECT verified FROM Email WHERE email = ?",
+            [email],
             (error, result, fields) => {
-    
-                if (error)
+
+                if (error) {
+                    console.log(error);
                     reject(new Error(error.sqlMessage ? error.sqlMessage : "Something went wrong while connecting to database"));
-    
+                }
+
                 resolve(result);
             });
-        
-    
+
+
     });
 }
 
@@ -63,19 +67,21 @@ const postEmail = (uid, email) => {
     return new Promise((resolve, reject) => {
 
         pool.query(
-            "INSERT INTO Email (email, uid, verified) VALUES (?, ?, DEFAULT)", 
-            [email, uid], 
+            "INSERT INTO Email (email, uid, verified) VALUES (?, ?, DEFAULT)",
+            [email, uid],
             (error, result, fields) => {
-    
-                if (error)
+
+                if (error) {
+                    console.log(error);
                     reject(new Error(error.sqlMessage ? error.sqlMessage : "Something went wrong while connecting to database"));
-                
+                }
+
                 result = {uid: uid, email: email, verified: false};
 
                 resolve(result);
             });
-        
-    
+
+
     });
 }
 
@@ -84,18 +90,19 @@ const updateStatusByEmail = (email, status) => {
     return new Promise((resolve, reject) => {
 
         pool.query(
-            "UPDATE Email SET verified = ? WHERE email = ?", 
-            [status, email], 
+            "UPDATE Email SET verified = ? WHERE email = ?",
+            [status, email],
             (error, result, fields) => {
-    
+
                 if (error) {
+                    console.log(error);
                     reject(new Error(error.sqlMessage ? error.sqlMessage : "Something went wrong while connecting to database"));
                 }
 
                 resolve(result);
             });
-        
-    
+
+
     });
 }
 
