@@ -33,55 +33,60 @@ docker run -d -p 5005:5005 --name dynf_contacts_api \
 ```
 
 
-## Entrypoints
+## Entry Points
+
+### Email
+
+Get the email of a given user id:
 
 ```
-GET /contacts/{uid}/phone
+GET  /contacts/{uid}/email
 
-Response (array of phone numbers)
+Response:
 {
-	data:
-		[
-			str // phone numbers
-		]
+	data: {
+		email: str
+	}
 }
 ```
 
+Get the uid of a given email:
+
 ```
-POST /contacts/{uid}/phone
+GET  /contacts/email/uid
+
+Request Body:
+{
+	email: str
+}
+
+Response:
+{
+	data: {
+		uid: int
+	}
+}
+```
+
+Get the verification status of an email:
+
+```
+GET /contacts/email/status
 
 Request body
 {
-
-	phone: str
-
+	email: str
 }
 
 Response
 {
 	data: {
-		uid: int
-		phone: str
-		verified: str
+		verified: bool
 	}
-
 }
 ```
 
-```
-GET  /contacts/{uid}/email
-
-Response (array of emails)
-{
-	data:
-	[
-		str // emails
-	]
-}
-[
-	str // emails
-]
-```
+Post an email:
 
 ```
 POST /contacts/{uid}/email
@@ -93,46 +98,86 @@ Request body
 
 Response
 {
-
 	data: {
 		uid: int
 		email: str
 		verified: bool
 	}
-
 }
 ```
 
+Update the email of a given uid:
+
 ```
-GET /contacts/email/status (get user email verification status)
+PUT /contacts/{uid}/email
 
 Request body
 {
 	email: str
 }
 
-Response
-{
-	data: {
-		verified: bool
-	}
-}
+Response: HTTP Status Code 200
 ```
 
-```
-PUT /contacts/{uid}/email/status (verify user email)
+Update the verification status of an email
 
-Request body
+```
+PUT /contacts/email/status
+
+Request body:
 {
 	email: str
 	status: bool
 }
 
-Response: status code 200
+Response: HTTP Status Code 200
 ```
 
+Delete the email of the given user:
+
 ```
-GET /contacts/phone/status (get user phone number verification status)
+DELETE /contacts/{uid}/email
+
+Response: Response: HTTP Status Code 200
+```
+
+### Phone Number
+
+Get the phone number of a given user id:
+
+```
+GET  /contacts/{uid}/phone
+
+Response:
+{
+	data: {
+		phone_number: str
+	}
+}
+```
+
+Get the uid of a given phone number:
+
+```
+GET  /contacts/phone/uid
+
+Request Body:
+{
+	phone: str
+}
+
+Response:
+{
+	data: {
+		uid: int
+	}
+}
+```
+
+Get the verification status of a phone number:
+
+```
+GET /contacts/phone/status
 
 Request body
 {
@@ -147,14 +192,158 @@ Response
 }
 ```
 
+Post a phone number:
+
 ```
-PUT /contacts/phone/status (verify user phone number)
+POST /contacts/{uid}/phone
 
 Request body
+{
+	phone: str
+}
+
+Response
+{
+	data: {
+		uid: int
+		phone_number: str
+		verified: bool
+	}
+}
+```
+
+Update the phone number of a given uid:
+
+```
+PUT /contacts/{uid}/phone
+
+Request body
+{
+	phone: str
+}
+
+Response: HTTP Status Code 200
+```
+
+Update the verification status of a phone number
+
+```
+PUT /contacts/phone/status
+
+Request body:
 {
 	phone: str
 	status: bool
 }
 
-Response: status code 200
+Response: HTTP Status Code 200
+```
+
+Delete the email of the given user:
+
+```
+DELETE /contacts/{uid}/phone
+
+Response: Response: HTTP Status Code 200
+```
+
+### Zip Code
+
+Get the zip code of a given user id:
+
+```
+GET  /contacts/{uid}/zip
+
+Response:
+{
+	data: {
+		zip_code: str
+	}
+}
+```
+
+Get uids of a given zip code:
+
+```
+GET  /contacts/zip/uid
+
+Request Body:
+{
+	zip_code: str
+}
+
+Response:
+{
+	data: {
+		uid: [int]
+	}
+}
+```
+
+Get the zip code verification status of an **user**:
+
+```
+GET /contacts/{uid}/zip/status
+
+Response
+{
+	data: {
+		verified: bool
+	}
+}
+```
+
+Post a zip code for an user:
+
+```
+POST /contacts/{uid}/zip
+
+Request body
+{
+	zip_code: str
+}
+
+Response
+{
+	data: {
+		uid: int
+		zip_code: str
+		verified: bool
+	}
+}
+```
+
+Update the zip code of a given uid:
+
+```
+PUT /contacts/{uid}/zip
+
+Request body
+{
+	zip_code: str
+}
+
+Response: HTTP Status Code 200
+```
+
+Update the verification status of a user's zip code
+
+```
+PUT /contacts/{uid}/zip/status
+
+Request body:
+{
+	zip_code: str
+	status: bool
+}
+
+Response: HTTP Status Code 200
+```
+
+Delete the zip code of the given user:
+
+```
+DELETE /contacts/{uid}/zip
+
+Response: Response: HTTP Status Code 200
 ```
