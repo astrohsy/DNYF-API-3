@@ -375,3 +375,12 @@ Response:
 ## Swagger API Document
 
 Please use entry point `/api-doc` to see the Swagger API document.
+
+## Known Issues
+
+For `POST /contacts` route, if any of the contact info DB is out of sync, for example, an uid exists in the ZipCode table, but not Phone table, the server will delete rows with the same uid as the request body in all tables. 
+
+For example, if there are is a row with `uid: 123` in the `Email` table, but not in `Phone` or `ZipCode` table, and the request body's `uid` field is also `123`, then the existing row with `uid: 123` will be deleted from the `Email` table.
+
+### Cause
+This is caused by the solution to partially successful row insertion. `POST /contacts` route uses the insertion strategy in `/db/*-*-queries.js`. However, in the case of **not** all three contact information fields are successully inserted, the rows that are successfully inserted in the same session needs to be removed and the row deletion is based on the `uid` field. Therefore, in the case of duplicated `uid` in the request body, the route will delete the row with duplicated `uid`.
