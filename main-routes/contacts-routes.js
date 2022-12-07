@@ -2,6 +2,7 @@ const express = require("express");
 const emailRoutes = require("../sub-routes/email-routes");
 const phoneRoutes = require("../sub-routes/phone-routes");
 const zipCodeRoutes = require("../sub-routes/zip-code-routes");
+const recordRoutes = require("../sub-routes/combined-record-routes");
 
 const router = express.Router();
 
@@ -20,11 +21,13 @@ router.use("/:uid?/zip", (req, res, next) => {
     zipCodeRoutes(req, res, next);
 });
 
+router.use("/", recordRoutes);
+
 router.use((error, req, res, next) => {
 	if (res.headerSent) {
 		return next(error);
 	}
-	res.status(error.code || 500);
+	res.status(error.statusCode || 500);
 	res.json({ message: error.message || "An unknown error occurred!" });
 });
 
