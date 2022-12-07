@@ -31,7 +31,8 @@ const postRecord = async (req, res, next) => {
 
         Promise.all([
             emailQueries.deleteEmailByUid(uid), 
-            phoneQueries.deletePhoneByUid(uid)
+            phoneQueries.deletePhoneByUid(uid),
+            zipCodeQueries.deleteZipCodeByUid(uid)
         ])
         .then((result) => {
 
