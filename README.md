@@ -348,6 +348,30 @@ DELETE /contacts/{uid}/zip
 Response: Response: HTTP Status Code 200
 ```
 
+### Combined Record
+
+Insert all contact info at once
+
+```
+POST /contacts
+
+Request body:
+{
+	"uid": str, 
+	"email": str, 
+	"phone": str, 
+	"zip_code": str
+}
+
+Response:
+{
+	"uid": str, 
+	"email": str, 
+	"phone": str, 
+	"zip_code": str
+}
+```
+
 ## Swagger API Document
 
 Please use entry point `/api-doc` to see the Swagger API document.

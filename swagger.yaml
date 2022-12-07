@@ -6,6 +6,54 @@ info:
 servers:
   - url: http://localhost:5005/contacts
 paths:
+
+  /:
+    post:
+        summary: Insert contact info for a user all at once
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  uid:
+                    type: string
+                    example: '1'
+                  email:
+                    type: string
+                    example: 'test1@email.com'
+                  phone:
+                    type: string
+                    example: '1231231234'
+                  zip_code:
+                    type: string
+                    example: '12345'
+        responses:
+          '200':
+            description: All contact info of the user
+            content:
+              application/json:
+                schema: 
+                  type: object
+                  properties:
+                    data:
+                      type: object
+                      properties:
+                        uid:
+                          type: string
+                          example: '1'
+                        email:
+                          type: string
+                          example: 'test1@email.com'
+                        phone:
+                          type: string
+                          example: '1231231234'
+                        zip_code:
+                          type: string
+                          example: '12345'
+
+# --------------------------------------------
   /{uid}/email:
       get:
         summary: Get email of a given user. 
