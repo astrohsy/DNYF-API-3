@@ -347,3 +347,7 @@ DELETE /contacts/{uid}/zip
 
 Response: Response: HTTP Status Code 200
 ```
+
+## Swagger API Document
+
+Please use entry point `/api-doc` to see the Swagger API document.
