@@ -63,7 +63,7 @@ Request Body:
 Response:
 {
 	data: {
-		uid: int
+		uid: str
 	}
 }
 ```
@@ -99,7 +99,7 @@ Request body
 Response
 {
 	data: {
-		uid: int
+		uid: str
 		email: str
 		verified: bool
 	}
@@ -169,7 +169,7 @@ Request Body:
 Response:
 {
 	data: {
-		uid: int
+		uid: str
 	}
 }
 ```
@@ -205,7 +205,7 @@ Request body
 Response
 {
 	data: {
-		uid: int
+		uid: str
 		phone_number: str
 		verified: bool
 	}
@@ -275,7 +275,7 @@ Request Body:
 Response:
 {
 	data: {
-		uid: [int]
+		uid: [str]
 	}
 }
 ```
@@ -306,7 +306,7 @@ Request body
 Response
 {
 	data: {
-		uid: int
+		uid: str
 		zip_code: str
 		verified: bool
 	}

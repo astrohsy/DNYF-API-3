@@ -14,8 +14,8 @@ paths:
             in: path
             required: true
             schema:
-              type: integer
-            example: 1
+              type: string
+            example: "1"
             description: The user ID
         responses:
           '200':
@@ -38,8 +38,8 @@ paths:
             in: path
             required: true
             schema:
-              type: integer
-            example: 1
+              type: string
+            example: "1"
             description: The user ID
         requestBody:
           required: true
@@ -63,8 +63,8 @@ paths:
                       type: object
                       properties:
                         uid:
-                          type: integer
-                          example: 1
+                          type: string
+                          example: "1"
                         email: 
                           type: string
                           example: 'test1@email.com'
@@ -79,8 +79,8 @@ paths:
             in: path
             required: true
             schema:
-              type: integer
-            example: 1
+              type: string
+            example: "1"
             description: The user ID
         requestBody:
           required: true
@@ -103,8 +103,8 @@ paths:
             in: path
             required: true
             schema:
-              type: integer
-            example: 1
+              type: string
+            example: "1"
             description: The user ID
         responses:
           '200':
@@ -135,8 +135,8 @@ paths:
                     type: object
                     properties:
                       uid:
-                        type: integer
-                        example: 1
+                        type: string
+                        example: "1"
 
   /email/status:
     get:
@@ -195,8 +195,8 @@ paths:
             in: path
             required: true
             schema:
-              type: integer
-            example: 1
+              type: string
+            example: "1"
             description: The user ID
         responses:
           '200':
@@ -219,8 +219,8 @@ paths:
             in: path
             required: true
             schema:
-              type: integer
-            example: 1
+              type: string
+            example: "1"
             description: The user ID
         requestBody:
           required: true
@@ -244,8 +244,8 @@ paths:
                       type: object
                       properties:
                         uid:
-                          type: integer
-                          example: 1
+                          type: string
+                          example: "1"
                         phone_number: 
                           type: string
                           example: '1231231234'
@@ -260,8 +260,8 @@ paths:
             in: path
             required: true
             schema:
-              type: integer
-            example: 1
+              type: string
+            example: "1"
             description: The user ID
         requestBody:
           required: true
@@ -284,8 +284,8 @@ paths:
             in: path
             required: true
             schema:
-              type: integer
-            example: 1
+              type: string
+            example: "1"
             description: The user ID
         responses:
           '200':
@@ -316,8 +316,8 @@ paths:
                     type: object
                     properties:
                       uid:
-                        type: integer
-                        example: 1
+                        type: string
+                        example: "1"
 
   /phone/status:
     get:
@@ -376,8 +376,8 @@ paths:
             in: path
             required: true
             schema:
-              type: integer
-            example: 1
+              type: string
+            example: "1"
             description: The user ID
         responses:
           '200':
@@ -400,8 +400,8 @@ paths:
             in: path
             required: true
             schema:
-              type: integer
-            example: 1
+              type: string
+            example: "1"
             description: The user ID
         requestBody:
           required: true
@@ -425,8 +425,8 @@ paths:
                       type: object
                       properties:
                         uid:
-                          type: integer
-                          example: 1
+                          type: string
+                          example: "1"
                         zip_code: 
                           type: string
                           example: '12345'
@@ -441,8 +441,8 @@ paths:
             in: path
             required: true
             schema:
-              type: integer
-            example: 1
+              type: string
+            example: "1"
             description: The user ID
         requestBody:
           required: true
@@ -465,8 +465,8 @@ paths:
             in: path
             required: true
             schema:
-              type: integer
-            example: 1
+              type: string
+            example: "1"
             description: The user ID
         responses:
           '200':
@@ -499,7 +499,7 @@ paths:
                       uid:
                         type: array
                         items: 
-                          type: integer
+                          type: string
                         example: [1, 3, 6]
 
   /{uid}/zip/status:
@@ -510,8 +510,8 @@ paths:
             in: path
             required: true
             schema:
-              type: integer
-            example: 1
+              type: string
+            example: "1"
             description: The user ID
       responses:
         '200':
@@ -535,8 +535,8 @@ paths:
             in: path
             required: true
             schema:
-              type: integer
-            example: 1
+              type: string
+            example: "1"
             description: The user ID
       requestBody:
         required: true
