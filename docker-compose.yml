@@ -16,7 +16,11 @@ services:
     ports:
       - 5005:5005
     networks:
-      - dnyfcontactsnet
+      dnyfcontactsnet:
+      dnyfcomposite:
+        aliases:
+          - dnyf-contacts-microservice
+
     depends_on:
       - db
 
@@ -40,3 +44,5 @@ volumes:
 
 networks:
   dnyfcontactsnet:
+  dnyfcomposite:
+    external: true
