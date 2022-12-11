@@ -91,7 +91,7 @@ const postZipCode = async (req, res, next) => {
     .then((valid) => {
 
         if (!valid) {
-            res.status(404).json({message: "Invalid zip code"});
+            res.status(400).json({message: "Invalid zip code"});
             return;
         }
 
@@ -156,7 +156,7 @@ const updateZipCodeByUid = async (req, res, next) => {
     .then((valid) => {
 
         if (!valid) {
-            res.status(404).json({message: "Invalid zip code"});
+            res.status(400).json({message: "Invalid zip code"});
             return;
         }
 
