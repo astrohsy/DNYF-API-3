@@ -101,13 +101,15 @@ const updateStatusByUid = (uid, status) => {
     });
 }
 
-const updateZipCodeByUid = (uid, zip_code) => {
+const updateZipCodeByUid = (uid, zip_code, valid) => {
 
     return new Promise((resolve, reject) => {
 
+        let verified = 1 ? valid : 0;
+
         pool.query(
-            "UPDATE ZipCode SET zip_code = ?, verified = DEFAULT(verified) WHERE uid = ?", 
-            [zip_code, uid], 
+            "UPDATE ZipCode SET zip_code = ?, verified = ? WHERE uid = ?", 
+            [zip_code, verified, uid], 
             (error, result, fields) => {
     
                 if (error) {

@@ -152,15 +152,28 @@ const updateZipCodeByUid = async (req, res, next) => {
     let zip_code = req.body.zip_code;
     let uid = req.uid;
 
-    zipCodeQueries.updateZipCodeByUid(uid, zip_code)
-    .then((result) => {
+    verifyService.verifyZipCode(zip_code)
+    .then((valid) => {
 
-        if (result.affectedRows == 0) {
-            res.status(404).json({message: "User or zip code does not exist"});
+        if (!valid) {
+            res.status(404).json({message: "Invalid zip code"});
             return;
         }
 
-        res.status(200).send();
+        zipCodeQueries.updateZipCodeByUid(uid, zip_code, valid)
+        .then((result) => {
+
+            if (result.affectedRows == 0) {
+                res.status(404).json({message: "User or zip code does not exist"});
+                return;
+            }
+
+            res.status(200).send();
+        })
+        .catch((err) => {
+            next(err);
+        })
+
     })
     .catch((err) => {
         next(err);
