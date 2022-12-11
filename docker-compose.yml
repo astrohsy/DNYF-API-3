@@ -16,8 +16,7 @@ services:
     ports:
       - 5005:5005
     networks:
-      dnyfcontactsnet:
-      dnyfcomposite:
+      dnyfcontacts:
         aliases:
           - dnyf-contacts-microservice
 
@@ -34,15 +33,12 @@ services:
       - MYSQL_PASSWORD=dbuser
       - MYSQL_DATABASE=dnyf-contacts-db
     volumes:
-      - ./db/init:/docker-entrypoint-initdb.d/:ro
+      - ./:/docker-entrypoint-initdb.d/:ro
     networks:
-      - dnyfcontactsnet
-
-volumes:
-  mysql_contacts:
-  mysql_config_contacts:
+      dnyfcontacts:
+        aliases:
+          - dnyf-contacts-db
 
 networks:
-  dnyfcontactsnet:
-  dnyfcomposite:
+  dnyfcontacts:
     external: true
