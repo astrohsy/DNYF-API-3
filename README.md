@@ -384,3 +384,9 @@ For example, if there are is a row with `uid: 123` in the `Email` table, but not
 
 ### Cause
 This is caused by the solution to partially successful row insertion. `POST /contacts` route uses the insertion strategy in `/db/*-*-queries.js`. However, in the case of **not** all three contact information fields are successully inserted, the rows that are successfully inserted in the same session needs to be removed and the row deletion is based on the `uid` field. Therefore, in the case of duplicated `uid` in the request body, the route will delete the row with duplicated `uid`.
+
+## Third-Party API
+
+### zippopotam
+
+zippopotam is used for zip code verification
