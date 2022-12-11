@@ -16,7 +16,8 @@ services:
     ports:
       - 5005:5005
     networks:
-      dnyfcontacts:
+      dnyfcontactsdb:
+      dnyfcomposite:
         aliases:
           - dnyf-contacts-microservice
 
@@ -35,10 +36,11 @@ services:
     volumes:
       - ./:/docker-entrypoint-initdb.d/:ro
     networks:
-      dnyfcontacts:
+      dnyfcontactsdb:
         aliases:
           - dnyf-contacts-db
 
 networks:
-  dnyfcontacts:
+  dnyfcontactsdb:
+  dnyfcomposite:
     external: true
