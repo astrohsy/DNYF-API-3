@@ -59,18 +59,20 @@ const getStatusByUid = (uid) => {
     });
 }
 
-const postZipCode = (uid, zip_code) => {
+const postZipCode = (uid, zip_code, valid) => {
     return new Promise((resolve, reject) => {
 
+        let verified = 1 ? valid : 0;
+
         pool.query(
-            "INSERT INTO ZipCode (zip_code, uid, verified) VALUES (?, ?, DEFAULT)", 
-            [zip_code, uid], 
+            "INSERT INTO ZipCode (zip_code, uid, verified) VALUES (?, ?, ?)", 
+            [zip_code, uid, verified], 
             (error, result, fields) => {
     
                 if (error)
                     reject(new Error(error.sqlMessage ? error.sqlMessage : "Something went wrong while connecting to database"));
                 
-                result = {uid: uid, zip_code: zip_code, verified: false};
+                result = {uid: uid, zip_code: zip_code, verified: valid};
 
                 resolve(result);
             });

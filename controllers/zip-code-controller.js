@@ -1,4 +1,5 @@
 const zipCodeQueries = require('../db/zip-code-queries');
+const verifyService = require('../services/zip-code-verify-service');
 
 const getZipCodeByUid = async (req, res, next) => {
 
@@ -86,15 +87,28 @@ const postZipCode = async (req, res, next) => {
     let uid = req.uid;
     let zip_code = req.body.zip_code;
 
-    zipCodeQueries.postZipCode(uid, zip_code)
-    .then((result) => {
+    verifyService.verifyZipCode(zip_code)
+    .then((valid) => {
 
-        if (result.length == 0) {
-            res.status(404).json({message: "Zipcode does not exist"});
+        if (!valid) {
+            res.status(404).json({message: "Invalid zip code"});
             return;
         }
 
-        res.status(200).json({data: result});
+        zipCodeQueries.postZipCode(uid, zip_code, valid)
+        .then((result) => {
+
+            if (result.length == 0) {
+                res.status(404).json({message: "Zipcode does not exist"});
+                return;
+            }
+
+            res.status(200).json({data: result});
+        })
+        .catch((err) => {
+            next(err);
+        })
+
     })
     .catch((err) => {
         next(err);
