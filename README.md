@@ -163,7 +163,7 @@ GET  /contacts/phone/uid
 
 Request Body:
 {
-	phone: str
+	phone_number: str
 }
 
 Response:
@@ -181,7 +181,7 @@ GET /contacts/phone/status
 
 Request body
 {
-	phone: str
+	phone_number: str
 }
 
 Response
@@ -199,7 +199,7 @@ POST /contacts/{uid}/phone
 
 Request body
 {
-	phone: str
+	phone_number: str
 }
 
 Response
@@ -219,7 +219,7 @@ PUT /contacts/{uid}/phone
 
 Request body
 {
-	phone: str
+	phone_number: str
 }
 
 Response: HTTP Status Code 200
@@ -232,7 +232,7 @@ PUT /contacts/phone/status
 
 Request body:
 {
-	phone: str
+	phone_number: str
 	status: bool
 }
 
@@ -359,7 +359,7 @@ Request body:
 {
 	"uid": str, 
 	"email": str, 
-	"phone": str, 
+	"phone_number": str, 
 	"zip_code": str
 }
 
@@ -367,7 +367,7 @@ Response:
 {
 	"uid": str, 
 	"email": str, 
-	"phone": str, 
+	"phone_number": str, 
 	"zip_code": str
 }
 ```

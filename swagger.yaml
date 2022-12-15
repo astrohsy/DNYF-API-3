@@ -23,7 +23,7 @@ paths:
                   email:
                     type: string
                     example: 'test1@email.com'
-                  phone:
+                  phone_number:
                     type: string
                     example: '1231231234'
                   zip_code:
@@ -46,7 +46,7 @@ paths:
                         email:
                           type: string
                           example: 'test1@email.com'
-                        phone:
+                        phone_number:
                           type: string
                           example: '1231231234'
                         zip_code:
@@ -235,7 +235,7 @@ paths:
 
 # --------------------------------------------
 
-  /{uid}/phone:
+  /{uid}/phone_number:
       get:
         summary: Get phone number of a given user. 
         parameters:
@@ -277,7 +277,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  phone:
+                  phone_number:
                     type: string
                     example: '1231231234'
         responses:
@@ -318,7 +318,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  phone:
+                  phone_number:
                     type: string
                     example: '1231231234'
         responses:
@@ -349,7 +349,7 @@ paths:
             schema:
               type: object
               properties:
-                phone:
+                phone_number:
                   type: string
                   example: "1231231234"
       responses:
@@ -377,7 +377,7 @@ paths:
             schema:
               type: object
               properties:
-                phone:
+                phone_number:
                   type: string
                   example: "1231231234"
       responses:
@@ -404,7 +404,7 @@ paths:
             schema:
               type: object
               properties:
-                phone:
+                phone_number:
                   type: string
                   example: '1231231234'
                 status:

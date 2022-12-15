@@ -6,7 +6,7 @@ const getPhoneByUid = async (req, res, next) => {
 
     phoneQueries.getPhoneByUid(uid)
     .then((result) => {
-        
+
         if (result.length == 0) {
             res.status(404).json({message: "UID does not exist"});
             return;
@@ -24,12 +24,12 @@ const getPhoneByUid = async (req, res, next) => {
 
 const getUidByPhone = async (req, res, next) => {
 
-    if (!(req.body && req.body.phone)) {
+    if (!(req.body && req.body.phone_number)) {
         res.status(400).json({message: "Request body is missing or invalid request format"});
         return;
     }
 
-    let phone_number = req.body.phone;
+    let phone_number = req.body.phone_number;
 
     phoneQueries.getUidByPhone(phone_number)
     .then((result) => {
@@ -51,12 +51,12 @@ const getUidByPhone = async (req, res, next) => {
 
 const getStatusByPhone = async (req, res, next) => {
 
-    if (!(req.body && req.body.phone)) {
+    if (!(req.body && req.body.phone_number)) {
         res.status(400).json({message: "Request body is missing or invalid request format"});
         return;
     }
 
-    let phone_number = req.body.phone;
+    let phone_number = req.body.phone_number;
 
     phoneQueries.getStatusByPhone(phone_number)
     .then((result) => {
@@ -78,13 +78,13 @@ const getStatusByPhone = async (req, res, next) => {
 
 const postPhone = async (req, res, next) => {
     
-    if (!(req.uid && req.body && req.body.phone)) {
+    if (!(req.uid && req.body && req.body.phone_number)) {
         res.status(400).json({message: "Request body is missing or invalid request format"});
         return;
     }
 
     let uid = req.uid;
-    let phone_number = req.body.phone;
+    let phone_number = req.body.phone_number;
 
     phoneQueries.postPhone(uid, phone_number)
     .then((result) => {
@@ -104,12 +104,12 @@ const postPhone = async (req, res, next) => {
 
 const updateStatusByPhone = async (req, res, next) => {
 
-    if (!(req.body && req.body.phone && req.body.status !== undefined)) {
+    if (!(req.body && req.body.phone_number && req.body.status !== undefined)) {
         res.status(400).json({message: "Request body is missing or invalid request format"});
         return;
     }
 
-    let phone_number = req.body.phone;
+    let phone_number = req.body.phone_number;
     let status = 1 ? req.body.status === true : 0
 
     phoneQueries.updateStatusByPhone(phone_number, status)
@@ -130,12 +130,12 @@ const updateStatusByPhone = async (req, res, next) => {
 
 const updatePhoneByUid = async (req, res, next) => {
 
-    if (!(req.uid && req.body && req.body.phone !== undefined)) {
+    if (!(req.uid && req.body && req.body.phone_number !== undefined)) {
         res.status(400).json({message: "Request body is missing or invalid request format"});
         return;
     }
 
-    let phone_number = req.body.phone;
+    let phone_number = req.body.phone_number;
     let uid = req.uid;
 
     phoneQueries.updatePhoneByUid(uid, phone_number)
