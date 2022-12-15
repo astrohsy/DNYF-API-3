@@ -23,13 +23,13 @@ docker-compose down --volumes
 ```
 docker build . -t <image name>
 
-docker run -d -p 5005:5005 --name dynf_contacts_api \
+docker run -d -p 5005:5005 --name dnyf_contacts_api \
 	-e DB_HOST='<DB host url>' \
 	-e DB_PORT='<DB port>' \
 	-e DB_USER='<DB username>' \
 	-e DB_PASSWORD='<DB password>' \
 	-e DB_NAME='<DB name>' \
-	dynf_contacts_api
+	dnyf_contacts_api
 ```
 
 
