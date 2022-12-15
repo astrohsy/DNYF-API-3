@@ -86,7 +86,7 @@ const updateStatusByUid = (uid, status) => {
     return new Promise((resolve, reject) => {
 
         pool.query(
-            "UPDATE Email SET verified = ? WHERE uid = ?", 
+            "UPDATE ZipCode SET verified = ? WHERE uid = ?", 
             [status, uid], 
             (error, result, fields) => {
     
